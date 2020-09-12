@@ -9,6 +9,7 @@ const App = () => {
 
     const search = async (e) => {
         if(e.key === 'Enter') {
+            setWeather({});
             const data = await fetchWeather(query);
 
            setWeather(data);
@@ -35,8 +36,12 @@ const App = () => {
                     }}
                  />
             </AnimatePresence>
+            <AnimatePresence>
             { weather.main && (
-                <div className="city">
+                <motion.div className="city"
+                    initial={{ opacity: 0}}
+                    animate={{ opacity: 1}}
+                >
                     <h2 className="city-title">
                         <span>{weather.name}</span>
                         <sup>{weather.sys.country}</sup>
@@ -49,8 +54,9 @@ const App = () => {
                         <img className="city-icon" src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} alt={weather.weather[0].description}/>
                         <p>{weather.weather[0].description}</p>
                      </div>
-                </div>
+                </motion.div>
             )}
+            </AnimatePresence>
         </div>
     )
 }
