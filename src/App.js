@@ -1,4 +1,5 @@
 import React, { useState} from 'react';
+import { motion, AnimatePresence } from "framer-motion";
 import { fetchWeather } from './api/fetchWater';
 import './App.css';
 
@@ -16,14 +17,24 @@ const App = () => {
     }
     return (
         <div className="main-container">
-            <input
-                type="text"
-                className="search"
-                placeholder="Search..."
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                onKeyPress={search}
-            />
+           <AnimatePresence>
+                <motion.input
+                    type="text"
+                    className="search"
+                    placeholder="Search..."
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    onKeyPress={search}
+                    initial={{
+                        opacity:0,
+                        y:'110%'
+                    }}
+                    animate={{
+                        opacity:1,
+                        y: 0
+                    }}
+                 />
+            </AnimatePresence>
             { weather.main && (
                 <div className="city">
                     <h2 className="city-title">
