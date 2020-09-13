@@ -14,7 +14,6 @@ async function fetchWeather(query) {
             }
         });
         
-        console.log(data);
     
         return data;
     } catch {

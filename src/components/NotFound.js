@@ -1,11 +1,20 @@
-import React from 'react'
+import React from 'react';
+import { motion, AnimatePresence} from 'framer-motion';
 
-function NotFound() {
+function NotFound({ notFound}) {
     return (
-        <div className="city">
-            <h2 className="city-title">Unable to find Location</h2>
-            <p>Please try again</p>
-        </div>
+        <AnimatePresence>
+            { notFound && (
+            <motion.div 
+                initial={{ opacity: 0}}
+                animate={{ opacity: 1}}
+                exit={{ opacity:0}}
+                className="city">
+                <h2 className="city-title">Unable to find Location</h2>
+                <p>Please try again</p>
+            </motion.div>
+            )}
+        </AnimatePresence>
     )
 }
 

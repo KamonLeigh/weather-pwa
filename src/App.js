@@ -51,10 +51,11 @@ const App = () => {
                         opacity:1,
                         y: 0
                     }}
+                    layout
                  />
             </AnimatePresence>
-                {notFound === false && <Weather weather={weather} /> }
-                {notFound && <NotFound /> }
+                <Weather weather={weather} notFound={notFound}/> 
+                <NotFound  notFound={notFound}/>
 
         </div>
     )

@@ -1,11 +1,11 @@
 import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
-const Weather = ({ weather }) => {   
+const Weather = ({ weather, notFound }) => {   
     return (
         <>
         <AnimatePresence exitBeforeEnter>
-            { weather.main && (
+            { weather.main && !notFound && (
                 <motion.div className="city"
                     layout
                     initial={{ opacity: 0}}
