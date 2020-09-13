@@ -1,16 +1,18 @@
 import React, { useState} from 'react';
 import { motion, AnimatePresence } from "framer-motion";
-import Weather  from './components/Weather'
+import Weather  from './components/Weather';
+import NotFound from './components/NotFound';
 import { fetchWeather } from './api/fetchWater';
 import './App.css';
 
 const App = () => {
     const [query, setQuery ] = useState('');
     const [ weather, setWeather] = useState({});
+    const [ notFound, setNotFound] = useState(false)
     
 
     const handleChange = (e) => {
-
+        setNotFound(false);
         setQuery(e.target.value);
 
     }
@@ -23,6 +25,8 @@ const App = () => {
 
            if (trimmedString.length) {
                const data = await fetchWeather(trimmedString);
+
+               if (!data) setNotFound(true);
     
                setWeather(data);
            }
@@ -49,7 +53,9 @@ const App = () => {
                     }}
                  />
             </AnimatePresence>
-           <Weather weather={weather}/>
+                {notFound === false && <Weather weather={weather} /> }
+                {notFound && <NotFound /> }
+
         </div>
     )
 }
