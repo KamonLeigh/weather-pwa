@@ -7,13 +7,25 @@ import './App.css';
 const App = () => {
     const [query, setQuery ] = useState('');
     const [ weather, setWeather] = useState({});
+    
+
+    const handleChange = (e) => {
+
+        setQuery(e.target.value);
+
+    }
 
     const search = async (e) => {
         if(e.key === 'Enter') {
             setWeather({});
-            const data = await fetchWeather(query);
 
-           setWeather(data);
+           const trimmedString = query.trim();
+
+           if (trimmedString.length) {
+               const data = await fetchWeather(trimmedString);
+    
+               setWeather(data);
+           }
            setQuery('');
         }
     }
@@ -25,7 +37,7 @@ const App = () => {
                     className="search"
                     placeholder="Search..."
                     value={query}
-                    onChange={(e) => setQuery(e.target.value)}
+                    onChange={handleChange}
                     onKeyPress={search}
                     initial={{
                         opacity:0,

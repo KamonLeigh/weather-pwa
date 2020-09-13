@@ -2,11 +2,13 @@ import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const Weather = ({ weather}) => {
+    console.log(weather);
     return (
         <>
         <AnimatePresence>
             { weather.main && (
                 <motion.div className="city"
+                    layout
                     initial={{ opacity: 0}}
                     animate={{ opacity: 1}}
                 >
